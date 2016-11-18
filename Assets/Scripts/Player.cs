@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+// using UnityEngine.UI;
 using System.Collections;
 
 public class Player : MonoBehaviour {
@@ -9,12 +10,12 @@ public class Player : MonoBehaviour {
 	// dying / respawning 
 	public float mSpeed;
 	public LayerMask floorMask;
+	//public Slider reloadSlider;
 	float camRayLength = 175f;
 	Vector3 movement;
 	Rigidbody playerRigidbody;
 	bool reloading = false;
-
-	float reloadTimer;
+	public float reloadTimer = 5f;
 	bool reloadTimerStarted = false;
 	
 	// Use this for initialization
@@ -24,26 +25,33 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
 	}
 
 	void FixedUpdate() {
 //--------- Shooting ---------
 		if(reloadTimerStarted) {
-			reloadTimer += Time.deltaTime;
+			// if(reloadSlider.IsActive()) {
+			// 	reloadSlider.maxValue = 5;
+			// 	reloadSlider.value = reloadTimer;
+			// 	// can add color, etc...
+			// }
+			reloadTimer -= Time.deltaTime;
 
-			if(reloadTimer > 5f) {
+			if(reloadTimer < 0f) {
 				reloadTimerStarted = false;
 				reloading = false;
-				reloadTimer = 0;
+				reloadTimer = 5;
+				// deactivate slider
 			}
 		}
 		if(!reloading && Input.GetButtonDown("Fire1")) {
 			// fire bullet @ currentposition 
-			// tag bullet as which character.
-			// relative to transform.forward.
-			// set reload to true
-			// start a timer
+			Shoot();
+			
+
 			// activate a slider gameobject.
+		
 		}
 //--------- Shooting ---------
 
@@ -84,14 +92,35 @@ public class Player : MonoBehaviour {
     }
 
 
+	void Shoot() {
+		// tag bullet as which character.
+		// relative to transform.forward.
 
-	void OnTriggerEnter(Collider other)
-	{
+		// ripped from SMB3
+		// GameObject go = (GameObject) Instantiate(m_FireBall, transform.position + (offset * transform.forward.normalized), Quaternion.identity);
+   		// go.GetComponent<Rigidbody2D>().velocity = new Vector3();
+		reloading = true;
+		reloadTimerStarted = true;
+	}
+	void OnTriggerEnter(Collider other)	{
 		if(other.gameObject.tag == "Powerup") {
-			// check script attached to it, to determine what to do
+			// determine what to do
+			switch(other.gameObject.GetComponent<powerupTest>().type) {
+				case powerupTest.PowerUPS.HEALTH:
+				 break;
+				case powerupTest.PowerUPS.DAMAGE:
+				 break;
+				case powerupTest.PowerUPS.SPEED:
+				 break;
+				case powerupTest.PowerUPS.WEAPON:
+				 break;
+			}
 		}
 	}
 
+	void OnCollisionEnter(Collision other) {
+		// getting hit.
+	}
 
 
 }
