@@ -1,0 +1,52 @@
+Mobile Game
+Arena warfare game (mp)
+
+ESRB Rating > E 10+
+	Powerups	> Heal				[50%]
+	(balloons)	> Double Damage		[2x dmg | 5 seconds]
+				> Weapon Switch		[swaps to random weapon]
+				> Speed				[2x speed | 10 seconds]
+
+	Weapons		> Crossbow 				[one shot]
+				> Slingshot				["status effect" | shoots multiple projectiles | 20% per shot]
+				> Nerf Gun (automatic)	[20% per shot]
+				> Paint Gun 			[close range, slows]
+				> Pool Noodle Sword	  	[knockback, 50% per slap]
+
+Controls	> drag to move
+			> button on screen to shoot / tap
+
+Aesthetic 	> Theme
+			> Maps
+			> Camera Angle -- isometric / 2.5D
+
+> Influences: Duck Game | Unreal Tournament
+
+
+Core Gameplay
+--> Modes: Deathmatch | Variety | Gun Game
+---- Deathmatch ----
+> Round Timer: 5 minutes
+> Kill Leader wins the Round
+> Stats: Points - Kills +1 "Suicides -1"
+
+
+---- Variety ----
+> Round Timer: 1minute + Sudden Death (arena closes in on them)
+> Last Man Standing wins the round
+> Goal is to win X rounds
+> Modifiers present: Dark mode, High speed, Golden Bow[one shot one kill], Pool Noodle Brawl, Bullet time
+
+
+---- Gun Game ----
+> Round Timer: 5 minutes
+
+
+Mechanics
+--> reload mechanic (automatic) "timer"
+--> spawning of powerups
+--> collide with 'powerup' to acquire "collider"
+--> AI 
+--> variety of maps
+
+
