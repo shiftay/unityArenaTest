@@ -10,19 +10,31 @@ public class Player : MonoBehaviour {
 	// dying / respawning 
 	public float mSpeed;
 	public LayerMask floorMask;
-	//public Slider reloadSlider;
 	float camRayLength = 175f;
 	Vector3 movement;
 	Rigidbody playerRigidbody;
 	bool reloading = false;
 	public float reloadTimer = 5f;
-	bool reloadTimerStarted = false;
-	
+	public bool reloadTimerStarted = false;
+	public float range = 100f;
+	LineRenderer gunLine;
+	Ray shootRay;
+	RaycastHit shotHit;
+	float timer;
+	public LayerMask things;
+
 	// Use this for initialization
 	void Start () {	
 		playerRigidbody = GetComponent<Rigidbody>();
+		gunLine = GetComponent <LineRenderer> ();
 	}
 	
+
+	void OnDrawGizmos()
+	{
+		Gizmos.color = Color.red;
+		Gizmos.DrawLine(transform.position + new Vector3(0,4,0), transform.position + transform.forward * range);
+	}
 	// Update is called once per frame
 	void Update () {
 
@@ -36,20 +48,22 @@ public class Player : MonoBehaviour {
 			// 	reloadSlider.value = reloadTimer;
 			// 	// can add color, etc...
 			// }
-			reloadTimer -= Time.deltaTime;
+			timer += Time.deltaTime;
+			if(timer > 0.25f)
+				gunLine.enabled = false;
 
-			if(reloadTimer < 0f) {
+			reloadTimer += Time.deltaTime;
+
+			if(reloadTimer > 5f) {
 				reloadTimerStarted = false;
 				reloading = false;
-				reloadTimer = 5;
+				reloadTimer = 0;
 				// deactivate slider
 			}
 		}
 		if(!reloading && Input.GetButtonDown("Fire1")) {
 			// fire bullet @ currentposition 
 			Shoot();
-			
-
 			// activate a slider gameobject.
 		
 		}
@@ -96,9 +110,38 @@ public class Player : MonoBehaviour {
 		// tag bullet as which character.
 		// relative to transform.forward.
 
-		// ripped from SMB3
-		// GameObject go = (GameObject) Instantiate(m_FireBall, transform.position + (offset * transform.forward.normalized), Quaternion.identity);
-   		// go.GetComponent<Rigidbody2D>().velocity = new Vector3();
+        timer = 0f;
+
+        // gunLight.enabled = true;
+
+        // gunParticles.Stop ();
+        // gunParticles.Play ();
+		Vector3 offset = new Vector3(0f, 4f,0f);
+        gunLine.enabled = true;
+        gunLine.SetPosition(0, transform.position + offset);
+		gunLine.materials[1].color = Color.cyan;
+        shootRay.origin = transform.position + offset;
+        shootRay.direction = transform.forward;
+		
+        if(Physics.Raycast(shootRay, out shotHit, range, things))
+        {
+        
+			PlayerHealth enemy = shotHit.collider.GetComponent<PlayerHealth>();
+
+			if(enemy.health != 0) {
+				enemy.health--;
+			}
+
+			gunLine.SetPosition (1, shotHit.point);
+			// damage players.
+     	}
+        else
+        {
+            gunLine.SetPosition (1, shootRay.origin + shootRay.direction * range);
+        }
+
+		
+
 		reloading = true;
 		reloadTimerStarted = true;
 	}
