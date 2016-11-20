@@ -23,6 +23,10 @@ public class Player : MonoBehaviour {
 	float timer;
 	public LayerMask things;
 
+	bool dblDmg;
+	bool dblSpeed;
+	
+
 	// Use this for initialization
 	void Start () {	
 		playerRigidbody = GetComponent<Rigidbody>();
@@ -33,7 +37,7 @@ public class Player : MonoBehaviour {
 	void OnDrawGizmos()
 	{
 		Gizmos.color = Color.red;
-		Gizmos.DrawLine(transform.position + new Vector3(0,4,0), transform.position + transform.forward * range);
+		Gizmos.DrawLine(transform.position + new Vector3(0,3,0), transform.position + transform.forward * range);
 	}
 	// Update is called once per frame
 	void Update () {

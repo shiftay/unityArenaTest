@@ -1,20 +1,25 @@
-Mobile Game
+Mobile Game // PC Game
 Arena warfare game (mp)
 
 ESRB Rating > E 10+
 	Powerups	> Heal				[50%]
 	(balloons)	> Double Damage		[2x dmg | 5 seconds]
-				> Weapon Switch		[swaps to random weapon]
+			//	> Weapon Switch		[swaps to random weapon]
+				> Weapon Width		[2x width | 5 seconds]
 				> Speed				[2x speed | 10 seconds]
 
-	Weapons		> Crossbow 				[one shot]
-				> Slingshot				["status effect" | shoots multiple projectiles | 20% per shot]
-				> Nerf Gun (automatic)	[20% per shot]
-				> Paint Gun 			[close range, slows]
-				> Pool Noodle Sword	  	[knockback, 50% per slap]
+//	Weapons		> Crossbow 				[one shot]
+//				> Slingshot				["status effect" | shoots multiple projectiles | 20% per shot]
+//				> Nerf Gun (automatic)	[20% per shot]
+//				> Paint Gun 			[close range, slows]
+//				> Pool Noodle Sword	  	[knockback, 50% per slap]
 
-Controls	> drag to move
-			> button on screen to shoot / tap
+	LAZERS
+
+Controls - Mobile	> drag to move
+					> button on screen to shoot / tap
+		 - PC		> WASD
+		 			> Left Click to shoot, and Mouse to control direction
 
 Aesthetic 	> Theme
 			> Maps
@@ -38,15 +43,15 @@ Core Gameplay
 > Modifiers present: Dark mode, High speed, Golden Bow[one shot one kill], Pool Noodle Brawl, Bullet time
 
 
----- Gun Game ----
-> Round Timer: 5 minutes
+//	---- Gun Game ----
+//	> Round Timer: 5 minutes
 
 
 Mechanics
 --> reload mechanic (automatic) "timer"
 --> spawning of powerups
---> collide with 'powerup' to acquire "collider"
+--> collide with 'powerup' to acquire "trigger"
 --> AI 
---> variety of maps
+--> variety of maps ?
 
 
