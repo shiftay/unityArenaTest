@@ -13,7 +13,6 @@ public class CameraManager : MonoBehaviour {
 
 	void OnDrawGizmos()
 	{
-
 		Gizmos.color = Color.black;
 		Gizmos.DrawLine(transform.position, player.position);
 	

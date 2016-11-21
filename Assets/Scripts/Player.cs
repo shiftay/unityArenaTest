@@ -22,18 +22,20 @@ public class Player : MonoBehaviour {
 	RaycastHit shotHit;
 	float timer;
 	public LayerMask things;
+	Animator anim;
 
+//--------- powerup Area ---------
 	bool dblDmg;
 	bool dblSpeed;
-	
+//--------- powerup Area ---------
 
 	// Use this for initialization
 	void Start () {	
+		anim = GetComponent<Animator>();
 		playerRigidbody = GetComponent<Rigidbody>();
 		gunLine = GetComponent <LineRenderer> ();
 	}
 	
-
 	void OnDrawGizmos()
 	{
 		Gizmos.color = Color.red;
@@ -45,6 +47,7 @@ public class Player : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
+		anim.SetBool("isWalking", false); // reset bool for walking
 //--------- Shooting ---------
 		if(reloadTimerStarted) {
 			// if(reloadSlider.IsActive()) {
@@ -76,8 +79,6 @@ public class Player : MonoBehaviour {
 //--------- Movement ---------
 		float v = Input.GetAxis("Vertical");
 		float h = Input.GetAxis("Horizontal");
-
-
 		Move(v,h);
 		Turning();
 //--------- Movement ---------
@@ -88,12 +89,13 @@ public class Player : MonoBehaviour {
 		Vector3 right = transform.right * h;
 		Vector3 ahead = transform.forward * v;
 		movement = right + ahead;
-
+		if(v != 0 || h != 0)
+			anim.SetBool("isWalking", true);
 		// movement.Set(h ,0f, v);
 
 		movement = movement.normalized * mSpeed * Time.deltaTime;
 		playerRigidbody.MovePosition(transform.position + movement);
-
+		
 	}
 
 	void Turning() {
@@ -120,31 +122,29 @@ public class Player : MonoBehaviour {
 
         // gunParticles.Stop ();
         // gunParticles.Play ();
-		Vector3 offset = new Vector3(0f, 4f,0f);
+		Vector3 offset = new Vector3(0f, 3f,0f);
         gunLine.enabled = true;
         gunLine.SetPosition(0, transform.position + offset);
 		gunLine.materials[1].color = Color.cyan;
         shootRay.origin = transform.position + offset;
         shootRay.direction = transform.forward;
 		
-        if(Physics.Raycast(shootRay, out shotHit, range, things))
+        if(Physics.Raycast(shootRay, out shotHit, range))
         {
-        
-			PlayerHealth enemy = shotHit.collider.GetComponent<PlayerHealth>();
+				if(shotHit.collider.tag == "Player") { 			// damage players.
+				PlayerHealth enemy = shotHit.collider.GetComponent<PlayerHealth>();
 
-			if(enemy.health != 0) {
-				enemy.health--;
+				if(enemy.health != 0) {
+					enemy.health--;
+				}
 			}
-
 			gunLine.SetPosition (1, shotHit.point);
-			// damage players.
+
      	}
         else
         {
             gunLine.SetPosition (1, shootRay.origin + shootRay.direction * range);
         }
-
-		
 
 		reloading = true;
 		reloadTimerStarted = true;
@@ -168,6 +168,4 @@ public class Player : MonoBehaviour {
 	void OnCollisionEnter(Collision other) {
 		// getting hit.
 	}
-
-
 }
