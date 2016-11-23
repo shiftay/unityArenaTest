@@ -14,7 +14,8 @@ public class Player : MonoBehaviour {
 	Vector3 movement;
 	Rigidbody playerRigidbody;
 	bool reloading = false;
-	public float reloadTimer = 5f;
+	public float cooldown;
+	public float reloadTimer = 0f;
 	public bool reloadTimerStarted = false;
 	public float range = 100f;
 	LineRenderer gunLine;
@@ -23,17 +24,25 @@ public class Player : MonoBehaviour {
 	float timer;
 	public LayerMask things;
 	Animator anim;
+	public int score;
+	PlayerHealth health;
 
 //--------- powerup Area ---------
 	bool dblDmg;
+	public bool DDMG { get {return dblDmg;}}
 	bool dblSpeed;
+	public bool DSPD { get { return dblSpeed;}}
+	float powerupTimerSpd;
+	float powerTimerDmg;
+
 //--------- powerup Area ---------
 
 	// Use this for initialization
 	void Start () {	
 		anim = GetComponent<Animator>();
 		playerRigidbody = GetComponent<Rigidbody>();
-		gunLine = GetComponent <LineRenderer> ();
+		gunLine = GetComponent<LineRenderer>();
+		health = GetComponent<PlayerHealth>();
 	}
 	
 	void OnDrawGizmos()
@@ -43,7 +52,26 @@ public class Player : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
+//----- Powerups -----
+		if(dblDmg) {
+			powerTimerDmg += Time.deltaTime;
 
+			if(powerTimerDmg >= 6f) {
+				dblDmg = false;
+				powerTimerDmg = 0;
+			}
+		}
+
+		if(dblSpeed) {
+			powerupTimerSpd += Time.deltaTime;
+
+			if(powerupTimerSpd >= 10f) {
+				dblSpeed = false;
+				powerupTimerSpd = 0;
+			}
+		}
+
+//----- Powerups -----
 	}
 
 	void FixedUpdate() {
@@ -61,7 +89,7 @@ public class Player : MonoBehaviour {
 
 			reloadTimer += Time.deltaTime;
 
-			if(reloadTimer > 5f) {
+			if(reloadTimer > cooldown) {
 				reloadTimerStarted = false;
 				reloading = false;
 				reloadTimer = 0;
@@ -92,10 +120,12 @@ public class Player : MonoBehaviour {
 		if(v != 0 || h != 0)
 			anim.SetBool("isWalking", true);
 		// movement.Set(h ,0f, v);
+		if(!dblSpeed)
+			movement = movement.normalized * mSpeed * Time.deltaTime;
+		else
+			movement = movement.normalized * (mSpeed * 2) * Time.deltaTime;
 
-		movement = movement.normalized * mSpeed * Time.deltaTime;
 		playerRigidbody.MovePosition(transform.position + movement);
-		
 	}
 
 	void Turning() {
@@ -135,7 +165,13 @@ public class Player : MonoBehaviour {
 				PlayerHealth enemy = shotHit.collider.GetComponent<PlayerHealth>();
 
 				if(enemy.health != 0) {
-					enemy.health--;
+					if(!dblDmg)
+						enemy.health--;
+					else 
+						enemy.health -= 2;
+					if(enemy.health <= 0) {
+						score++;
+					}
 				}
 			}
 			gunLine.SetPosition (1, shotHit.point);
@@ -154,14 +190,20 @@ public class Player : MonoBehaviour {
 			// determine what to do
 			switch(other.gameObject.GetComponent<powerupTest>().type) {
 				case powerupTest.PowerUPS.HEALTH:
-				 break;
+					if(health.health != 2)
+						health.health++;
+					 break;
 				case powerupTest.PowerUPS.DAMAGE:
+					dblDmg = true;
 				 break;
 				case powerupTest.PowerUPS.SPEED:
+					dblSpeed = true;
 				 break;
 				case powerupTest.PowerUPS.WEAPON:
 				 break;
 			}
+
+			Destroy(other.gameObject);
 		}
 	}
 

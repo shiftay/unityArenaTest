@@ -73,15 +73,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\AITest.cs" />
+    <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Managers\CameraManager.cs" />
     <Compile Include="Assets\Scripts\Mouse.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\PlayerHealth.cs" />
     <Compile Include="Assets\Scripts\SteeringBehaviour.cs" />
     <Compile Include="Assets\Scripts\UIScript.cs" />
+    <Compile Include="Assets\Scripts\gizmoSpawnPoint.cs" />
     <Compile Include="Assets\Scripts\powerupTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Fonts\pizzadudedotdk.txt" />
     <None Include="Assets\VoxelCharacters\ToonShading\Shaders\Mirror 1.shader" />
     <None Include="Assets\VoxelCharacters\ToonShading\Shaders\ToonBasic.shader" />
     <None Include="Assets\VoxelCharacters\ToonShading\Shaders\ToonBasicOutline.shader" />

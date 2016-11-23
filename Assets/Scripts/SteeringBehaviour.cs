@@ -101,8 +101,8 @@ public abstract class SteeringBehaviour : MonoBehaviour {
 		// objectToMove.transform.rotation = Quaternion.LookRotation(objectToMove.velocity, Vector3.right);
 		objectToMove.transform.rotation = Quaternion.LookRotation(objectToMove.velocity);
 
-		Quaternion temp = objectToMove.transform.rotation;
-		temp = Quaternion.Euler(90f, temp.eulerAngles.y, temp.eulerAngles.z);
-		objectToMove.transform.rotation = temp;
+		// Quaternion temp = objectToMove.transform.rotation;
+		// temp = Quaternion.Euler(90f, temp.eulerAngles.y, temp.eulerAngles.z);
+		// objectToMove.transform.rotation = temp;
 	}
 }
