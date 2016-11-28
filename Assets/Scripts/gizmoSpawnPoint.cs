@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class gizmoSpawnPoint : MonoBehaviour {
 
@@ -12,14 +11,4 @@ public class gizmoSpawnPoint : MonoBehaviour {
 		Gizmos.DrawSphere(transform.position, radius);
 	}
 
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 
-
-public class CameraManager : MonoBehaviour {
+public class CameraManager : NetworkBehaviour {
 	public Transform player;
 	public float distance;
 	public float height;
@@ -10,14 +10,6 @@ public class CameraManager : MonoBehaviour {
 	private float desiredAngle = 0;
 	float desiredHeight;
 	private Rigidbody playerRB;
-
-	void OnDrawGizmos()
-	{
-		Gizmos.color = Color.black;
-		Gizmos.DrawLine(transform.position, player.position);
-	
-		Gizmos.DrawLine(transform.position, transform.position + (-transform.forward * 5));
-	}
 
 	void Start() {
 		playerRB = player.GetComponent<Rigidbody>();
@@ -30,8 +22,6 @@ public class CameraManager : MonoBehaviour {
 	void FixedUpdate() {
 		desiredHeight = player.position.y + height;
 		desiredAngle = player.eulerAngles.y;
-
-		Vector3 localVelocity = player.InverseTransformDirection(playerRB.velocity);
 	}
 
 	// Update is called once per frame
@@ -47,7 +37,7 @@ public class CameraManager : MonoBehaviour {
 				}
 			} else {
 				// zoom a little
-				Debug.Log("hit something else");
+				// Debug.Log("hit something else");
 				// distance -= 0.5f;
 				// height -= 0.25f;
 			}

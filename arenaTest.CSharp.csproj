@@ -73,15 +73,33 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\AITest.cs" />
-    <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\BalloonPop.cs" />
+    <Compile Include="Assets\Scripts\BufferServerInput.cs" />
+    <Compile Include="Assets\Scripts\LaserColor.cs" />
+    <Compile Include="Assets\Scripts\Managers\BalloonManager.cs" />
     <Compile Include="Assets\Scripts\Managers\CameraManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\GM.cs" />
+    <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\LazerShooter.cs" />
+    <Compile Include="Assets\Scripts\Managers\NetworkManagerHUD.cs" />
+    <Compile Include="Assets\Scripts\Managers\SceneManage.cs" />
+    <Compile Include="Assets\Scripts\Managers\ScoreManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\SpawnManager.cs" />
     <Compile Include="Assets\Scripts\Mouse.cs" />
+    <Compile Include="Assets\Scripts\Network\Network.cs" />
+    <Compile Include="Assets\Scripts\Network\NetworkMovement.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\PlayerHealth.cs" />
+    <Compile Include="Assets\Scripts\SinglePlayer\Player1.cs" />
+    <Compile Include="Assets\Scripts\SinglePlayer\PlayerHealth1.cs" />
+    <Compile Include="Assets\Scripts\SinglePlayer\UIScript1.cs" />
     <Compile Include="Assets\Scripts\SteeringBehaviour.cs" />
-    <Compile Include="Assets\Scripts\UIScript.cs" />
+    <Compile Include="Assets\Scripts\UI\CharacterSelection.cs" />
+    <Compile Include="Assets\Scripts\UI\UIScript.cs" />
+    <Compile Include="Assets\Scripts\colorthing.cs" />
     <Compile Include="Assets\Scripts\gizmoSpawnPoint.cs" />
     <Compile Include="Assets\Scripts\powerupTest.cs" />
+    <Compile Include="Assets\Scripts\testSelect.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Fonts\pizzadudedotdk.txt" />
