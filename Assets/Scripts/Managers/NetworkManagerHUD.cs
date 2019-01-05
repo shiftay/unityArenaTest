@@ -24,7 +24,7 @@ public class NetworkManagerHUD : NetworkManager
 
 	void SetIPAddress()
 	{
-		string ipAddress = GameObject.Find("InputFieldIPAddress").transform.FindChild("Text").GetComponent<Text>().text;
+		string ipAddress = GameObject.Find("InputFieldIPAddress").transform.Find("Text").GetComponent<Text>().text;
 		NetworkManager.singleton.networkAddress = ipAddress;
 	}
 
